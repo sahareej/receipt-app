@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سند قبض وصرف - مطعم صهاريج عدن</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            direction: rtl;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .signature {
+            margin-top: 20px;
+            text-align: right;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.jpg" alt="شعار مطعم صهاريج عدن" style="width: 100px; display: block; margin: auto;">
+        <h1>مطعم صهاريج عدن</h1>
+        <h2>إنشاء سند قبض أو صرف</h2>
+        <form id="voucherForm">
+            <label>نوع السند</label><br>
+            <select id="type">
+                <option>قبض</option>
+                <option>صرف</option>
+            </select><br><br>
+
+            <label>الاسم</label><br>
+            <input id="name" type="text"><br><br>
+
+            <label>المبلغ</label><br>
+            <input id="amount" type="number"><br><br>
+
+            <label>السبب/البيان</label><br>
+            <input id="reason" type="text"><br><br>
+
+            <label>التاريخ</label><br>
+            <input id="date" type="date" value="{current_date}"><br><br>
+
+            <button type="button" onclick="printReceipt()">طباعة السند</button>
+        </form>
+
+        <div id="receipt" style="display: none; text-align: right;">
+            <h2>سند <span id="receiptType"></span></h2>
+            <p><strong>الاسم:</strong> <span id="receiptName"></span></p>
+            <p><strong>المبلغ:</strong> <span id="receiptAmount"></span></p>
+            <p><strong>السبب:</strong> <span id="receiptReason"></span></p>
+            <p><strong>التاريخ:</strong> <span id="receiptDate"></span></p>
+            <div class="signature">
+                <p><strong>توقيع المحاسب:</strong> ________________</p>
+                <p><strong>توقيع المستلم:</strong> ________________</p>
+                <p><strong>توقيع الإدارة:</strong> ________________</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function printReceipt() {
+            document.getElementById("receiptType").textContent = document.getElementById("type").value;
+            document.getElementById("receiptName").textContent = document.getElementById("name").value;
+            document.getElementById("receiptAmount").textContent = document.getElementById("amount").value;
+            document.getElementById("receiptReason").textContent = document.getElementById("reason").value;
+            document.getElementById("receiptDate").textContent = document.getElementById("date").value;
+
+            document.getElementById("voucherForm").style.display = "none";
+            document.getElementById("receipt").style.display = "block";
+            
+            window.print();
+
+            document.getElementById("voucherForm").style.display = "block";
+            document.getElementById("receipt").style.display = "none";
+        }
+    </script>
+</body>
+</html>
