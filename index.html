@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سند قبض وصرف</title>
+</head>
+<body style="font-family:sans-serif; direction:rtl; text-align:center; margin-top:50px;">
+    <h2>إنشاء سند قبض أو صرف</h2>
+    <form>
+        <label>نوع السند</label><br>
+        <select id="type">
+            <option>قبض</option>
+            <option>صرف</option>
+        </select><br><br>
+
+        <label>الاسم</label><br>
+        <input id="name"><br><br>
+
+        <label>المبلغ</label><br>
+        <input id="amount" type="number"><br><br>
+
+        <label>السبب/البيان</label><br>
+        <input id="reason"><br><br>
+
+        <button type="button" onclick="printReceipt()">طباعة السند</button>
+    </form>
+
+    <script>
+        function printReceipt(){
+            let type = document.getElementById("type").value;
+            let name = document.getElementById("name").value;
+            let amount = document.getElementById("amount").value;
+            let reason = document.getElementById("reason").value;
+
+            let receipt = `
+            سند ${type}\n
+            الاسم: ${name}\n
+            المبلغ: ${amount}\n
+            السبب: ${reason}\n
+            التاريخ: ${(new Date()).toLocaleDateString('ar')}
+            `;
+
+            alert(receipt);
+        }
+    </script>
+</body>
+</html>
